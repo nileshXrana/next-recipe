@@ -105,11 +105,11 @@ export default function Home() {
 
                   {recipe.ingredients && recipe.ingredients.length > 0 && (
                     <Box className={styles.ingredientsRow}>
-                      {recipe.ingredients.slice(0, 3).map((ing: string, i: number) => (
+                      {recipe.ingredients.slice(0, 5).map((ing: string, i: number) => (
                         <Chip key={i} label={ing} size="small" />
                       ))}
-                      {recipe.ingredients.length > 3 && (
-                        <Chip label={`+${recipe.ingredients.length - 3}`} size="small" variant="outlined" />
+                      {recipe.ingredients.length > 5 && (
+                        <Chip label={`+${recipe.ingredients.length - 5}`} size="small" variant="outlined" />
                       )}
                     </Box>
                   )}
