@@ -1,0 +1,44 @@
+.select {
+    min-width: 120px;
+}
+
+.inputLabel {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.uploadBtn {
+    width: 100%;
+}
+
+.timeAndIngredientsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 2rem;
+    align-items: center;
+}
+
+.selectedIngredients {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.ingredientChip {
+    display: flex;
+    align-items: center;
+    padding: 0.30rem 0.7rem;
+    margin: 0.25rem;
+    background-color: #0f92fd27;
+    border-radius: 16px;
+    font-size: 0.875rem;
+}
+
+.removeIngredient {
+    margin-left: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
