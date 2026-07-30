@@ -51,7 +51,8 @@
     "react-hook-form": "^7.83.0",
     "react-hotkeys-hook": "^5.3.3",
     "react-redux": "^9.3.0",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "use-debounce": "^10.1.1"
   },
   "devDependencies": {
     "@base-ui/react": "^1.6.0",

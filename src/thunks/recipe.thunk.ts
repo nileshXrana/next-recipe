@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { recipe, recipeIngrediants, recipeImages } from '@/services/recipe.service';
+import { recipe, getUserRecipes, getAllRecipes } from '@/services/recipe.service';
+import { recipeData } from '@/components/file-dialog/file-dialog';
 
 export const recipeThunk = createAsyncThunk(
-    'auth/login',
-    async (_, { rejectWithValue }) => {
+    'recipe/create',
+    async (recipeData: recipeData, { rejectWithValue }) => {
         try {
-            const res = await recipe();
+            const res = await recipe(recipeData);
             if (res?.error) {
                 return rejectWithValue(res.error);
             }
@@ -16,11 +17,11 @@ export const recipeThunk = createAsyncThunk(
     }
 );
 
-export const recipeIngrediantsThunk = createAsyncThunk(
-    'auth/login',
-    async (_, { rejectWithValue }) => {
+export const getUserRecipesThunk = createAsyncThunk(
+    'recipe/getUserRecipes',
+    async (params: { search?: string; page?: number; limit?: number } | undefined, { rejectWithValue }) => {
         try {
-            const res = await recipeIngrediants();
+            const res = await getUserRecipes(params);
             if (res?.error) {
                 return rejectWithValue(res.error);
             }
@@ -31,11 +32,11 @@ export const recipeIngrediantsThunk = createAsyncThunk(
     }
 );
 
-export const recipeImagesThunk = createAsyncThunk(
-    'auth/login',
-    async (_, { rejectWithValue }) => {
+export const getAllRecipesThunk = createAsyncThunk(
+    'recipe/getAllRecipes',
+    async (params: { search?: string; page?: number; limit?: number } | undefined, { rejectWithValue }) => {
         try {
-            const res = await recipeImages();
+            const res = await getAllRecipes(params);
             if (res?.error) {
                 return rejectWithValue(res.error);
             }

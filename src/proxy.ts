@@ -6,11 +6,11 @@ export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     if (token) {
-        if (pathname === '/login' || pathname === '/signup' || pathname === '/') {
+        if (pathname === '/login' || pathname === '/signup') {
             return NextResponse.redirect(new URL('/dashboard', request.url));
         }
     } else {
-        if (pathname === '/dashboard' || pathname === '/') {
+        if (pathname === '/dashboard') {
             return NextResponse.redirect(new URL('/login', request.url));
         }
     }
@@ -19,5 +19,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/', '/dashboard', '/login', '/signup'],
+    matcher: ['/dashboard', '/login', '/signup'],
 };

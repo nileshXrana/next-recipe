@@ -183,7 +183,7 @@ const MobileToolbarContent = ({
   </>
 )
 
-export function SimpleEditor({ setDescription }: { setDescription: (value: string) => void }) {
+export function SimpleEditor({ setDescription }: { setDescription?: (value: string) => void }) {
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -230,7 +230,7 @@ export function SimpleEditor({ setDescription }: { setDescription: (value: strin
     ],
     content,
     onUpdate({ editor }) {
-      setDescription(editor.getHTML());
+      setDescription?.(editor.getHTML());
     },
   })
 

@@ -22,20 +22,21 @@ import Ingredients from '@/components/ingredients/ingredients';
 import Box from '@mui/material/Box';
 import ClearIcon from '@mui/icons-material/Clear';
 import dayjs from 'dayjs';
-import { recipeThunk , recipeIngrediantsThunk, recipeImagesThunk } from '@/thunks/recipe.thunk';
+import { recipeThunk } from '@/thunks/recipe.thunk';
 
-
-export interface fileData {
+export interface recipeData {
     name: string;
-    tags: string;
-    file: File;
+    description: string;
+    cookingTime: string;
+    ingredients: string[];
+    images: File;
 }
+
 
 export default function FileDialog() {
     const [open, setOpen] = React.useState(false);
-    const [tags, setTags] = React.useState('Others');
     const [selectedIngredients, setSelectedIngredients] = React.useState<string[]>([]);
-    const [cookingTime, setCookingTime] = React.useState<any>(dayjs('00:00:00', 'HH:mm:ss'));
+    const [cookingTime, setCookingTime] = React.useState<any>(dayjs().hour(0).minute(0).second(0));
     const [description, setDescription] = React.useState<string>('');
 
     const dispatch = useDispatch() as any
@@ -51,23 +52,21 @@ export default function FileDialog() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        // const name = formData.get('name') as string;
-        // const file = formData.get('file-upload') as File;
 
-        const recipeData = {
+        const formattedTime = cookingTime && typeof cookingTime.format === 'function' && cookingTime.isValid()
+            ? cookingTime.format('HH:mm:ss')
+            : '00:00:00';
+
+        const recipeData: recipeData = {
             name: formData.get('name') as string,
             description: description,
-            cookingTime: cookingTime.format('HH:mm:ss'),
+            cookingTime: formattedTime,
             ingredients: selectedIngredients,
-            file: formData.get('file-upload') as File,
+            images: formData.get('file-upload') as File,
         };
 
-        console.log('Recipe Data:', recipeData);
-
-
-
-        // const res = await dispatch(uploadThunk(fileData));
-        // console.log(res);
+        const res = await dispatch(recipeThunk(recipeData));
+        console.log(res);
 
         handleClose();
     };
