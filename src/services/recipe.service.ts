@@ -33,3 +33,23 @@ export const getAllRecipes = async (params?: { search?: string; page?: number; l
         throw error;
     }
 };
+
+export const getMyIngredients = async () => {
+    try {
+        const response = await axios.get("http://localhost:8000/ingredients");
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getRecipesByIngredients = async (ingredients: string[]) => {
+    try {
+        const response = await axios.get("http://localhost:8000/recipe/filterIngredients", {
+            params: { ingredients: ingredients.join(",") },
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};

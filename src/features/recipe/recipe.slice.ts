@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { recipeThunk, getUserRecipesThunk, getAllRecipesThunk } from '@/thunks/recipe.thunk';
+import { recipeThunk, getUserRecipesThunk, getAllRecipesThunk, getMyIngredientsThunk, getRecipesByIngredientsThunk } from '@/thunks/recipe.thunk';
 
 export const recipeSlice = createSlice({
     name: 'recipes',
@@ -7,6 +7,7 @@ export const recipeSlice = createSlice({
         recipes: [] as any[],
         userRecipes: [] as any[],
         total: 0,
+        myIngredients: [] as any[],
         userTotal: 0,
         loading: false,
         error: null as string | null,
@@ -29,6 +30,8 @@ export const recipeSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload || action.error.message;
             })
+
+
             .addCase(getUserRecipesThunk.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -42,6 +45,8 @@ export const recipeSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload || action.error.message;
             })
+
+
             .addCase(getAllRecipesThunk.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -54,7 +59,38 @@ export const recipeSlice = createSlice({
             .addCase(getAllRecipesThunk.rejected, (state, action: any) => {
                 state.loading = false;
                 state.error = action.payload || action.error.message;
-            });
+            })
+
+
+            .addCase(getMyIngredientsThunk.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getMyIngredientsThunk.fulfilled, (state, action) => {
+                state.loading = false;
+                state.myIngredients = action.payload;
+            })
+            .addCase(getMyIngredientsThunk.rejected, (state, action: any) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message;
+            })
+
+
+            .addCase(getRecipesByIngredientsThunk.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getRecipesByIngredientsThunk.fulfilled, (state, action) => {
+                state.loading = false;
+                state.userRecipes = action.payload;
+                console.log("Recipes fetched based on ingredients:", action.payload);
+            })
+            .addCase(getRecipesByIngredientsThunk.rejected, (state, action: any) => {
+                state.loading = false;
+                state.error = action.payload
+            })
+
+            
     },
 });
 

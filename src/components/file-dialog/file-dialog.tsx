@@ -10,11 +10,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import styles from "./file-dialog.module.css";
 import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import { useDispatch } from 'react-redux';
 import { SimpleEditor } from '@/components/tiptap-templates/simple/simple-editor'
-import { Label } from '@radix-ui/react-dropdown-menu';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';

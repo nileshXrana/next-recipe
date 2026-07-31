@@ -9,6 +9,8 @@ import { getUserRecipesThunk } from "@/thunks/recipe.thunk";
 import { useDebounce } from "use-debounce";
 import Link from "next/link";
 import styles from "./dashboard.module.css";
+import { getMyIngredientsThunk } from "@/thunks/recipe.thunk";
+import MultipleSelect from "@/components/select/select";
 
 export default function Dashboard() {
   const dispatch = useDispatch() as any;
@@ -19,6 +21,8 @@ export default function Dashboard() {
 
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
   useEffect(() => {
     setPage(1);
@@ -41,6 +45,8 @@ export default function Dashboard() {
     setIsDialogOpen(false);
   };
 
+  const { myIngredients } = useSelector((state: any) => state.recipes);
+
   return (
     <Box className={styles.container}>
       <Box className={styles.header}>
@@ -57,12 +63,18 @@ export default function Dashboard() {
             className={styles.searchField}
           />
         </Box>
+
         <Box className={styles.headerActions}>
           <Link href="/" style={{ textDecoration: "none" }}>
             <Button variant="outlined">Back to Home</Button>
           </Link>
           <FileDialog />
         </Box>
+      </Box>
+
+      {/* filters based on ingredients */}
+      <Box>
+        <MultipleSelect />
       </Box>
 
       <Box className={styles.searchContainer}>
